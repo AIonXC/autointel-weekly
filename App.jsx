@@ -71,6 +71,8 @@ const App = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const current = featuredArticles[currentArticle] || featuredArticles[0];
+
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-800'}`}>
       {/* Header */}
@@ -142,6 +144,44 @@ const App = () => {
         <div className="max-w-4xl mx-auto">
           <h3 className="text-2xl font-bold mb-8 text-center">This Week's Featured Insight</h3>
           <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300">
-            <div className="flex justify-between items-start mb-4
-            export default App;
+            <div className="flex justify-between items-start mb-4">
+              <div className="w-3/4">
+                <h4 className="text-xl font-semibold">{current.title}</h4>
+                <p className="text-sm text-gray-300 mt-2">{current.summary}</p>
+                <p className="mt-3 text-xs italic text-gray-400">{current.source} · Impact: {current.impact}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {current.tags.map((tag) => (
+                    <span key={tag} className="text-xs px-2 py-1 border border-gray-600 rounded-full">{tag}</span>
+                  ))}
+                </div>
+              </div>
+              <div className="w-1/4 flex items-start justify-end">
+                <div className="text-right">
+                  <div className="text-sm text-gray-400">Featured</div>
+                  <div className="mt-2 text-xs text-gray-300">{current.source}</div>
+                </div>
+              </div>
+            </div>
 
+            <div className="mt-6 flex justify-center space-x-2">
+              {featuredArticles.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentArticle(idx)}
+                  aria-label={`Ir al artículo ${idx + 1}`}
+                  className={`w-3 h-3 rounded-full ${idx === currentArticle ? 'bg-cyan-400' : 'bg-gray-600'}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="py-8 text-center text-sm text-gray-400">
+        © {new Date().getFullYear()} AutoIntel Weekly · All rights reserved
+      </footer>
+    </div>
+  );
+};
+
+export default App;
