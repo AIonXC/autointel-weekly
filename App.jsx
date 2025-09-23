@@ -143,3 +143,5 @@ const App = () => {
           <h3 className="text-2xl font-bold mb-8 text-center">This Week's Featured Insight</h3>
           <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300">
             <div className="flex justify-between items-start mb-4
+            export default App;
+
